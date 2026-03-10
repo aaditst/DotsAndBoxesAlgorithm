@@ -136,29 +136,6 @@ public class Board {
         return true;
     }
 
-    public String[] validMoves() {
-        String[] moves = new String[(size + 1) * size * 2];
-        int index = 0;
-
-        for (int r = 0; r <= size; r++) {
-            for (int c = 0; c < size; c++) {
-                if (hEdges[r][c] == 0) {
-                    moves[index++] = "h " + r + " " + c;
-                }
-            }
-        }
-
-        for (int r = 0; r < size; r++) {
-            for (int c = 0; c <= size; c++) {
-                if (vEdges[r][c] == 0) {
-                    moves[index++] = "v " + r + " " + c;
-                }
-            }
-        }
-
-        return moves;
-    }
-
     private String printRow(int player) {
         if (player == 1) {
             return ANSI_RED + "---" + ANSI_RESET;
@@ -177,5 +154,60 @@ public class Board {
         } else {
             return "|";
         }
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public int[][] getHEdges() {
+        return hEdges;
+    }
+
+    public int[][] getVEdges() {
+        return vEdges;
+    }
+
+    public int[][] getBoxes(){
+        return boxes;
+    }
+
+    public boolean isValidMove(String type, int r, int c) {
+        if (type == "h") {
+            if (hEdges[r][c] == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if (vEdges[r][c] == 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    public String[] validMoves() {
+        String[] moves = new String[(size + 1) * size * 2];
+        int index = 0;
+
+        for (int r = 0; r <= size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (isValidMove("h", r, c)) {
+                    moves[index++] = "h " + r + " " + c;
+                }
+            }
+        }
+
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c <= size; c++) {
+                if (isValidMove("v", r, c)) {
+                    moves[index++] = "v " + r + " " + c;
+                }
+            }
+        }
+
+        return moves;
     }
 }
