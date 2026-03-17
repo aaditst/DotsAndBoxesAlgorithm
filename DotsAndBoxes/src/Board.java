@@ -210,4 +210,22 @@ public class Board {
 
         return moves;
     }
+
+    public int getScore(int player) {
+        int score = 0;
+
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                if (boxes[r][c] == player) {
+                    score++;
+                }
+            }
+        }
+
+        return score;
+    }
+
+    public int getScoreDifference() {
+        return getScore(1) - getScore(2);
+    }
 }
