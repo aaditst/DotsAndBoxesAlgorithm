@@ -228,4 +228,31 @@ public class Board {
     public int getScoreDifference() {
         return getScore(1) - getScore(2);
     }
+
+    public int getMoveCompletion(String move) {
+        String[] parts = move.split(" ");
+
+        String type = parts[0];
+        int r = Integer.parseInt(parts[1]);
+        int c = Integer.parseInt(parts[2]);
+
+        int movesCompleteable = 0;
+
+        if (type.equals("h")) {
+            if (hEdges[r-1][c] != 0 && vEdges[r-1][c] != 0 && vEdges[r-1][c+1] != 0) {
+                movesCompleteable++;
+            }
+            if (hEdges[r+1][c] != 0 && vEdges[r][c] != 0 && vEdges[r][c+1] != 0) {
+                movesCompleteable++;
+            }
+        } else {
+            if (vEdges[r][c-1] != 0 && hEdges[r][c-1] != 0 && hEdges[r+1][c-1] != 0) {
+                movesCompleteable++;
+            }
+            if (vEdges[r][c+1] != 0 && hEdges[r][c] != 0 && hEdges[r+1][c] != 0) {
+                movesCompleteable++;
+            }
+        }
+        return movesCompleteable;
+    }
 }
