@@ -173,18 +173,10 @@ public class Board {
     }
 
     public boolean isValidMove(String type, int r, int c) {
-        if (type == "h") {
-            if (hEdges[r][c] == 0) {
-                return true;
-            } else {
-                return false;
-            }
+        if ("h".equals(type)) {
+            return hEdges[r][c] == 0;
         } else {
-            if (vEdges[r][c] == 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return vEdges[r][c] == 0;
         }
     }
 
